@@ -90,6 +90,14 @@ mysql -upagamento -p eats_pagamento < eats_pagamento.sql
 docker exec -it dockertestes_mysql.pagamento_1 bash
 mysql -upagamento -p
 
+APAGAR DADOS DE PAGAMENTO ---------------
+
+docker exec -it mysql-dockerized mysql -u root -p
+drop database eats_pagamento;
+use eats;
+drop table pagamento;
+
+
 
 
 
