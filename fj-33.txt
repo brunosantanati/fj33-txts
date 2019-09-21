@@ -1,0 +1,95 @@
+MYSQL -----------------
+
+docker pull mysql:5.7
+
+docker run --rm -d -p 3307:3306 --name eats.mysql -e MYSQL_ROOT_PASSWORD=caelum123 -e MYSQL_DATABASE=eats_pagamento -e MYSQL_USER=pagamento -e MYSQL_PASSWORD=pagamento123 mysql:5.7
+
+docker ps
+
+docker ps --format "{{.Image}}\t{{.Names}}"
+
+docker logs eats.mysql
+
+docker exec -it eats.mysql mysql -upagamento -p eats_pagamento
+
+docker stop eats.mysql
+
+MONGODB -----------------
+
+docker pull mongo:3.6
+
+docker run --rm -d -p 27018:27017 --name eats.mongo mongo:3.6
+
+docker logs eats.mongo
+
+docker stop eats.mongo
+
+DOCKER COMPOSE  ----------------
+
+Abaixo docker-compose.yml:
+---
+version: '3'
+
+services:
+  mysql.pagamento:
+    image: mysql:5.7
+    restart: on-failure
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: caelum123
+      MYSQL_DATABASE: eats_pagamento
+      MYSQL_USER: pagamento
+      MYSQL_PASSWORD: pagamento123
+  mongo.distancia:
+    image: mongo:3.6
+    restart: on-failure
+    ports:
+      - "27018:27017"
+---
+
+docker-compose up -d
+
+docker-compose exec mongo.distancia mongo
+
+docker-compose logs
+
+docker-compose logs mysql.pagamento
+
+docker-compose stop
+
+docker-compose start
+
+docker-compose down
+CUIDADO: esse comando apaga todos os dados dos BDs. Usar docker-compose stop.
+
+LINUX ------------------
+
+type mysql
+alias
+
+No ~/.bashrc:
+alias mysql.start="docker run --rm -d -v ~/.var/lib/mysql:/var/lib/mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 --name mysql-dockerized mysql:5.7.21"
+alias mysql="docker exec -it mysql-dockerized mysql $@"
+alias mysql.stop="docker kill mysql-dockerized"
+
+MIGRAÇÃO DE DADOS -----------------
+
+docker exec -it mysql-dockerized mysqldump -u root --opt eats_pagamento > eats_pagamento.sql
+
+docker-compose up -d mysql.pagamento
+
+Importar os dados sem docker:
+mysql -u pagamento -p --host 127.0.0.1 --port 3307 eats_pagamento < eats_pagamento.sql
+
+Importar os dados com docker:
+docker cp eats_pagamento.sql dockertestes_mysql.pagamento_1:/eats_pagamento.sql
+docker exec -it dockertestes_mysql.pagamento_1 bash
+mysql -upagamento -p eats_pagamento < eats_pagamento.sql
+
+docker exec -it dockertestes_mysql.pagamento_1 bash
+mysql -upagamento -p
+
+
+
+
