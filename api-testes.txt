@@ -1,3 +1,11 @@
 EXERCÍCIO 5.5 (TESTE PAGAMENTO APONTANDO PARA BD ESPECÍFICO)
 
 curl -X POST -i -H 'Content-Type: application/json' -d '{"valor": 51.8, "nome": "JOÃO DA SILVA", "numero": "1111 2222 3333 4444", "expiracao": "2022-07", "codigo": "123", "formaDePagamentoId": 2, "pedidoId": 1}' http://localhost:8081/pagamentos
+
+TESTE SERVIÇO DE DISTÂNCIA NO MONGODB
+
+curl -i http://localhost:8082/restaurantes/mais-proximos/70238500
+
+curl -i http://localhost:8082/restaurantes/mais-proximos/70238500/tipo-de-cozinha/1
+
+curl -i http://localhost:8082/restaurantes/70238500/restaurante/1

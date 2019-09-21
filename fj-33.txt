@@ -1,3 +1,15 @@
+FAZER CHAMADA NO SERVIÇO ----------------
+
+Rest
+  - RestTemplate(Spring)
+  - Feing(Spring)
+
+gRPC
+  - ProtoBuffer (binário)
+  - RMI(Java para Java)
+
+SOAP
+
 MYSQL -----------------
 
 docker pull mysql:5.7
@@ -73,7 +85,7 @@ alias mysql.start="docker run --rm -d -v ~/.var/lib/mysql:/var/lib/mysql -e MYSQ
 alias mysql="docker exec -it mysql-dockerized mysql $@"
 alias mysql.stop="docker kill mysql-dockerized"
 
-MIGRAÇÃO DE DADOS -----------------
+MIGRAÇÃO DE DADOS MYSQL -----------------
 
 docker exec -it mysql-dockerized mysqldump -u root --opt eats_pagamento > eats_pagamento.sql
 
@@ -96,6 +108,30 @@ docker exec -it mysql-dockerized mysql -u root -p
 drop database eats_pagamento;
 use eats;
 drop table pagamento;
+
+MIGRAÇÃO DE DADOS MONGO -----------------
+
+docker exec -it mysql-dockerized mysql -u root -p eats
+
+select r.id, r.cep, r.tipo_de_cozinha_id from restaurante r where r.aprovado = true into outfile '/var/lib/mysql-files/restaurantes.csv' fields terminated by ',' enclosed by '"' lines terminated by '\n';
+
+docker exec -it mysql-dockerized cat /var/lib/mysql-files/restaurantes.csv > /tmp/restaurantes.csv
+
+docker-compose up -d mongo.distancia
+
+cp /tmp/restaurantes.csv ~/
+
+docker cp ~/restaurantes.csv dockertestes_mongo.distancia_1:/restaurantes.csv
+
+docker exec -it dockertestes_mongo.distancia_1 bash
+
+mongoimport --db eats_distancia --collection restaurante --type csv --fields=_id,cep,tipoDeCozinhaId --file restaurantes.csv
+
+mongo eats_distancia
+
+show collections;
+
+db.restaurante.find();
 
 
 
