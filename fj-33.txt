@@ -125,13 +125,15 @@ docker cp ~/restaurantes.csv dockertestes_mongo.distancia_1:/restaurantes.csv
 
 docker exec -it dockertestes_mongo.distancia_1 bash
 
-mongoimport --db eats_distancia --collection restaurante --type csv --fields=_id,cep,tipoDeCozinhaId --file restaurantes.csv
+mongoimport --db eats_distancia --collection restaurantes --type csv --fields=_id,cep,tipoDeCozinhaId --file restaurantes.csv
 
 mongo eats_distancia
 
 show collections;
 
-db.restaurante.find();
+db.restaurantes.find();
+
+db.restaurante.drop()
 
 
 
