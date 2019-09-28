@@ -135,6 +135,8 @@ db.restaurantes.find();
 
 db.restaurante.drop()
 
+docker-compose exec mongo.distancia mongo eats_distancia
+
 
 
 
