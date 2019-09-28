@@ -1,3 +1,8 @@
+TESTAR SERVIÇO DE PAGAMENTO
+
+curl -X POST -i -H 'Content-Type: application/json' -d '{"valor": 51.8, "nome": "JOÃO DA SILVA", "numero": "1111 2222 3333 4444", "expiracao": "2022-07", "codigo": "123", "formaDePagamentoId": 2, "pedidoId": 1}' http://localhost:8081/pagamentos
+curl -X PUT -i http://localhost:8081/pagamentos/1
+
 EXERCÍCIO 5.5 (TESTE PAGAMENTO APONTANDO PARA BD ESPECÍFICO)
 
 curl -X POST -i -H 'Content-Type: application/json' -d '{"valor": 51.8, "nome": "JOÃO DA SILVA", "numero": "1111 2222 3333 4444", "expiracao": "2022-07", "codigo": "123", "formaDePagamentoId": 2, "pedidoId": 1}' http://localhost:8081/pagamentos
