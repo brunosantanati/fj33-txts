@@ -8,8 +8,12 @@ LINKS --------------------------
 update fork:
 https://gist.github.com/CristinaSolana/1885435
 https://stefanbauer.me/articles/how-to-keep-your-git-fork-up-to-date
+
 Links projetos Caelum no Gitlab:
 https://gitlab.com/aovs/projetos-cursos
+
+RabbitMQ Simulator
+http://tryrabbitmq.com/
 
 FAZER CHAMADA NO SERVIÇO ----------------
 
