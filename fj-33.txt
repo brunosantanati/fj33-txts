@@ -1,3 +1,16 @@
+TECNOLOGIAS ----------------
+Circuit Braker
+Hystrix
+VAVr - (https://www.vavr.io/) Para adicionar aspectos funcionais no Java
+Resilience4J(junção do Hystrix + VAVr)
+
+LINKS --------------------------
+update fork:
+https://gist.github.com/CristinaSolana/1885435
+https://stefanbauer.me/articles/how-to-keep-your-git-fork-up-to-date
+Links projetos Caelum no Gitlab:
+https://gitlab.com/aovs/projetos-cursos
+
 FAZER CHAMADA NO SERVIÇO ----------------
 
 Rest
