@@ -14,3 +14,7 @@ curl -i http://localhost:8082/restaurantes/mais-proximos/70238500
 curl -i http://localhost:8082/restaurantes/mais-proximos/70238500/tipo-de-cozinha/1
 
 curl -i http://localhost:8082/restaurantes/70238500/restaurante/1
+
+EXERCÍCIO 6.5(3) TESTE HATEOAS
+
+curl -i http://localhost:8081/pagamentos/1
